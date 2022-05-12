@@ -7,30 +7,34 @@ const API = {
   base: 'https://api.openweathermap.org/data/2.5/'
 }
 
-
 class App extends Component {
   constructor() {
     super()
     this.state = {
-      weather: [],
       searchfield: '',
+      weatherResult: [],
     }
   }
-
-  componentDidMount() {
-    fetch(`${API.base}weather?q=houston&units=metric&APPID=${API.key}`)
+  
+  onSearchSubmit = (searchInputValue) => {
+    fetch(`${API.base}weather?q=${searchInputValue}&units=metric&APPID=${API.key}`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      fetch(`${API.base}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=alerts,minutely&appid=${API.key}`)
       .then(res => res.json())
       .then(data => {
         console.log(data)
       })
+    })
   }
-
+        
   render() {
     return ( 
       <div className="space-y-7">
         <h1 className="m-2">Weather App</h1>
         <div className="w-full h-[25rem] flex items-center justify-center">
-          <SearchBox/>
+          <SearchBox onSearchSubmit = {this.onSearchSubmit}/>
         </div>
         <WeatherContainer/>
       </div>
