@@ -11,32 +11,39 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      searchfield: '',
-      weatherResult: [],
+      weatherCurrent: [],
+      weatherHourly: [],
+      weatherDaily: [],
     }
   }
   
   onSearchSubmit = (searchInputValue) => {
-    fetch(`${API.base}weather?q=${searchInputValue}&units=metric&APPID=${API.key}`)
+    fetch(`${API.base}weather?q=${searchInputValue}&units=imperial&APPID=${API.key}`)
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-      fetch(`${API.base}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude=alerts,minutely&appid=${API.key}`)
+      fetch(`${API.base}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&exclude=alerts,minutely&appid=${API.key}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
+        // console.log(data.current)
+        this.setState({ weatherCurrent: data.current })
+        this.setState({ weatherHourly: data.hourly })
+        this.setState({ weatherDaily: data.daily })
       })
     })
   }
         
   render() {
+    const {weatherCurrent, weatherHourly, weatherDaily} = this.state
+
     return ( 
       <div className="space-y-7">
         <h1 className="m-2">Weather App</h1>
-        <div className="w-full h-[25rem] flex items-center justify-center">
+        <div className="w-full h-[15rem] md:h-[25rem] flex items-center justify-center">
           <SearchBox onSearchSubmit = {this.onSearchSubmit}/>
         </div>
-        <WeatherContainer/>
+        {(weatherCurrent.length !== 0) ? (
+          <WeatherContainer weatherCurrent={weatherCurrent} weatherHourly={weatherHourly} weatherDaily={weatherDaily}/>
+        ) : ('')}
       </div>
     );
   }
