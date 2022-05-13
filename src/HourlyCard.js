@@ -1,25 +1,21 @@
 import React from "react";
 
 const HourlyCard = ({weatherHourly, timezone}) => {
-  // console.log(timezoneOffset)
   const nextHours = weatherHourly.slice(0,6).map(nextWeatherHour => {
     return nextWeatherHour
   })
 
   function convertTimestamptoTime(passedDate, timezone) {
     let time = new Date(passedDate * 1000).toLocaleString('en-US', {timeZone: timezone});
-    // console.log(time)
     let timeSystem = time.slice(-2)
     let hour = time.match(/([ ])[0-9]+/).join('').trim()
-    console.log(timeSystem)
     return `${hour} ${timeSystem}`
   }
 
   return (
     <div className="flex flex-row hover:scale-105 duration-150 justify-evenly items-center bg-indigo-100 p-6 bg-opacity-80 rounded-3xl shadow-md">
       {
-        nextHours.map((object, i) => {
-          console.log(object.dt)
+        nextHours.map((object) => {
           return (
             <div className="text-center" key={object.dt}>
                 <img alt="weather-icon" src={`http://openweathermap.org/img/wn/${object.weather[0].icon}@2x.png`}/>
