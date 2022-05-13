@@ -21,8 +21,8 @@ const DailyCard = ({weatherDaily}) => {
                             <span className="flex justify-center items-center">
                                 <img alt="weather-icon flex" src={`http://openweathermap.org/img/wn/${object.weather[0].icon}.png`}/>
                             </span>
-                            <p className="text-sm">{object.weather[0].description}</p>
-                            <p className="text-sm">{Math.round(object.temp.min)}°-{Math.round(object.temp.max)}° </p>
+                            <p className="text-xs sm:text-sm">{object.weather[0].description}</p>
+                            <p className="text-xs sm:text-sm">{Math.round(object.temp.min)}°-{Math.round(object.temp.max)}° </p>
                             <p className=" text-gray-500 mt-2 text-sm">{convertTimestamptoTime(object.dt)}</p>
                         </div>        
                     )

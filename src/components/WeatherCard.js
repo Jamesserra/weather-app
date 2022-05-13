@@ -1,13 +1,13 @@
 import React from "react";
 
-const WeatherCard = ({weatherCurrent}) => {
+const WeatherCard = ({weatherCurrent, timezone}) => {
     const current = new Date()
     let monthNumber = (new Date().getMonth()+1);
     let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let monthName = monthNames[monthNumber - 1];
 
     const newDate = (passedDate) => {
-        let time = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit'}).format(passedDate)
+        let time = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit', timeZone: timezone}).format(passedDate)
         return `${time}`
       }
 

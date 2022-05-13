@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchBox from './SearchBox';
+import SearchBox from '../components/SearchBox';
 import WeatherContainer from './WeatherContainer';
 
 const API = {
@@ -26,7 +26,6 @@ class App extends Component {
       fetch(`${API.base}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&exclude=alerts,minutely&appid=${API.key}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data)
         this.setState({ weatherCurrent: data.current })
         this.setState({ weatherHourly: data.hourly })
         this.setState({ weatherDaily: data.daily })
@@ -41,7 +40,7 @@ class App extends Component {
     return ( 
       <div className="space-y-7">
         <h1 className="m-2">Weather App</h1>
-        <div className="w-full h-[2rem] lg:h-[25rem] flex items-center justify-center">
+        <div className="w-full h-[2rem] lg:h-[12rem] flex items-center justify-center">
           <SearchBox onSearchSubmit = {this.onSearchSubmit}/>
         </div>
         {(weatherCurrent.length !== 0) ? (

@@ -19,7 +19,7 @@ const HourlyCard = ({weatherHourly, timezone}) => {
           return (
             <div className="text-center" key={object.dt}>
                 <img alt="weather-icon" src={`http://openweathermap.org/img/wn/${object.weather[0].icon}@2x.png`}/>
-                <p className="text-xl text-gray-900">{Math.round(object.temp)}°F</p>
+                <p className="text-xl text-gray-900">{Math.round(object.temp)}°</p>
                 <p className="text-gray-500 mt-2 text-sm">{convertTimestamptoTime(object.dt, timezone)}</p>
             </div>    
           )
