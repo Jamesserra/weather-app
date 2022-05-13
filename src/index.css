@@ -4,4 +4,11 @@
 
 body {
     background: url('./assets/bg.jpg');
+    background-repeat: no-repeat;
+}
+
+@media (max-width: 810px) {
+    body {
+        background-position: top ;
+    }
 }
