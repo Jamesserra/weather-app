@@ -7,7 +7,7 @@ const WeatherCard = ({weatherCurrent}) => {
     let monthName = monthNames[monthNumber - 1];
 
     return (
-        <div className="flex flex-row justify-between xl:justify-around items-center bg-white p-8 bg-opacity-70 rounded-3xl shadow-md">
+        <div className="flex flex-row hover:scale-105 duration-150 justify-between xl:justify-around items-center bg-indigo-100 p-8 bg-opacity-80 rounded-3xl shadow-md">
             <p className="text-4xl sm:text-8xl  font-bold text-right text-gray-900">{Math.round(weatherCurrent.temp)}°F</p>
             <img alt="weather-icon" src={`http://openweathermap.org/img/wn/${weatherCurrent.weather[0].icon}@4x.png`}/>
             <div>
