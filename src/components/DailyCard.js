@@ -17,7 +17,7 @@ const DailyCard = ({weatherDaily}) => {
             {
                 weekAheadWeather.map(object => {
                     return (
-                        <div className="grid grid-rows-4 justify-center justify-items-center" key={object.dt}>
+                        <div className="grid grid-rows-4 justify-items-center text-center" key={object.dt}>
                             <div>
                                 <p className=" text-gray-500 text-sm">{convertTimestamptoTime(object.dt)}</p>
                             </div>
@@ -28,7 +28,7 @@ const DailyCard = ({weatherDaily}) => {
                                 <p className="text-xs sm:text-sm">{Math.round(object.temp.min)}° - {Math.round(object.temp.max)}° </p>
                             </div>
                             <div>
-                                <p className="text-xs sm:text-sm">{object.weather[0].description}</p>
+                                <p className=" text-xs sm:text-sm">{object.weather[0].description}</p>
                             </div>
                         </div>        
                     )
