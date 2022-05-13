@@ -6,13 +6,25 @@ const WeatherCard = ({weatherCurrent}) => {
     let monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     let monthName = monthNames[monthNumber - 1];
 
+    const newDate = (passedDate) => {
+        let time = new Intl.DateTimeFormat('en-US', { hour: '2-digit', minute: '2-digit'}).format(passedDate)
+        return `${time}`
+      }
+
     return (
-        <div className="flex flex-row hover:scale-105 duration-150 justify-between xl:justify-around items-center bg-indigo-100 p-8 bg-opacity-80 rounded-3xl shadow-md">
-            <p className="text-4xl sm:text-8xl  font-bold text-right text-gray-900">{Math.round(weatherCurrent.temp)}°F</p>
-            <img alt="weather-icon" src={`http://openweathermap.org/img/wn/${weatherCurrent.weather[0].icon}@4x.png`}/>
-            <div>
-                <p className="text-2xl sm:text-6xl mt-2">{monthName} {current.getDate()}</p>
-                <p className="text-2xl sm:text-4xl text-center mt-2 "></p>
+        <div className="flex hover:scale-105 duration-150 justify-between xl:justify-around items-center bg-indigo-100 p-8 bg-opacity-80 rounded-3xl shadow-md">
+            <div className="flex-none">
+                <p className="text-4xl sm:text-8xl  font-bold text-right text-gray-900">{Math.round(weatherCurrent.temp)}°F</p> 
+                <p className="text-center">{weatherCurrent.weather[0].description}</p>
+            </div>
+            <div className="">
+                <img className="" alt="weather-icon" src={`http://openweathermap.org/img/wn/${weatherCurrent.weather[0].icon}@4x.png`}/>
+            </div>
+            <div className="flex-none sm:text-2xl">
+                <p className="">{monthName} {current.getDate()}</p>
+                <p className="temp">Humidity: {weatherCurrent.humidity}%</p>
+                <p className="sunrise-sunset">Sunrise: {newDate(new Date(weatherCurrent.sunrise * 1000))}</p>
+                <p className="sunrise-sunset">Sunset: {newDate(new Date(weatherCurrent.sunset * 1000))}</p>
             </div>
         </div>
     )

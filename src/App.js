@@ -14,6 +14,7 @@ class App extends Component {
       weatherCurrent: [],
       weatherHourly: [],
       weatherDaily: [],
+      timezone: '',
       query: '',
     }
   }
@@ -25,18 +26,18 @@ class App extends Component {
       fetch(`${API.base}onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&units=imperial&exclude=alerts,minutely&appid=${API.key}`)
       .then(res => res.json())
       .then(data => {
-        console.log(data.hourly)
+        console.log(data)
         this.setState({ weatherCurrent: data.current })
         this.setState({ weatherHourly: data.hourly })
         this.setState({ weatherDaily: data.daily })
+        this.setState({ timezone: data.timezone })
         this.setState({ query: searchInputValue })
       })
     })
   }
         
   render() {
-    const {weatherCurrent, weatherHourly, weatherDaily, query} = this.state
-
+    const {weatherCurrent, weatherHourly, weatherDaily, query, timezone} = this.state
     return ( 
       <div className="space-y-7">
         <h1 className="m-2">Weather App</h1>
@@ -44,7 +45,7 @@ class App extends Component {
           <SearchBox onSearchSubmit = {this.onSearchSubmit}/>
         </div>
         {(weatherCurrent.length !== 0) ? (
-          <WeatherContainer name={query} weatherCurrent={weatherCurrent} weatherHourly={weatherHourly} weatherDaily={weatherDaily}/>
+          <WeatherContainer name={query} weatherCurrent={weatherCurrent} weatherHourly={weatherHourly} weatherDaily={weatherDaily} timezone={timezone}/>
         ) : ('')}
       </div>
     );
